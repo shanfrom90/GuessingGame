@@ -7,45 +7,51 @@ namespace GuessingGame
         static void Main(string[] args)
         {
             Random random = new Random();
-            int winningNumber = random.Next(1, 11);
-            Console.WriteLine("Please enter a number between 1 and 10. I will tell you when you've guessed the winning number.");
-            int userNumber = Convert.ToInt32(Console.ReadLine());
+            int winningNumber = random.Next(1,11);
             int attempts = 0;
-            int attemptLimit = 1;
+            int attemptLimit = 3;
             bool outOfAttempts = false;
-            if (userNumber == 0)
+           
+          
+            while (!outOfAttempts && attempts < attemptLimit)
             {
-                Console.WriteLine("Please check your number to make sure it is between 1 and 10");
-            }
-
-            else if (userNumber == winningNumber)
-            {
-                Console.WriteLine("You won!");
-            }
-            else if (userNumber == -1)
-            {
-                Console.Clear();
-            }
-            while (userNumber != winningNumber && !outOfAttempts)
-            {
-                
-                if (attempts<attemptLimit)
-                {
-                  
-                    Console.WriteLine("Try again!");
-                    userNumber = Convert.ToInt32(Console.ReadLine());
-                    attempts++;
-                    ;
-                }
-                else
+                Console.WriteLine("Please enter a number between 1 and 10. I will tell you when you've guessed the winning number.");
+                int userNumber = Convert.ToInt32(Console.ReadLine());
+                if (userNumber == -1)
                 {
                     outOfAttempts = true;
-                    Console.WriteLine("Sorry, you lose");
                 }
-              
-            }
-           
+                else if (userNumber == winningNumber)
+                {
+                    Console.WriteLine("You won!");
+                    outOfAttempts = true;
+                }
+                else if (userNumber == 0)
+                {
+                    Console.WriteLine("Please enter a number between one and ten");
+                }
 
+                else if (userNumber > winningNumber)
+                {
+                    Console.WriteLine("The winning number is smaller.");
+
+                }
+
+                else if (userNumber < winningNumber)
+                {
+                    Console.WriteLine("The winning number is larger.");
+
+                }
+          
+                else
+                {
+                    Console.WriteLine("Sorry, you lose");
+                   
+                    
+                }
+
+                attempts++;
+            }
         }
     }
 }
